@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group 'ly.potential'
+version '1.0-SNAPSHOT'
+sourceCompatibility = JavaVersion.VERSION_14
+targetCompatibility = JavaVersion.VERSION_14
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0-M1'
+}
+
+def jarName = "app.jar"
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": "ly.potential.CanvasDrawerApplication"
+        )
+    }
+    archiveFileName = jarName
+
+    doLast {
+        copy {
+            from file("$buildDir/libs/$jarName")
+            into "."
+        }
+
+    }
+}
