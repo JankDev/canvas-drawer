@@ -1,7 +1,7 @@
 package ly.potential.command.parsing;
 
 import ly.potential.command.Command;
-import ly.potential.command.CommandType;
+import ly.potential.command.CommandFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +16,10 @@ public class CommandParser implements Parser<Optional<Command>, String> {
                 .map(String::strip)
                 .map(Pattern.compile(" ")::split)
                 .map(arr -> {
-                    CommandType commandType = CommandType.valueOf(arr[0]);
+                    String type = arr[0];
+                    String[] args = List.of(arr).subList(1, arr.length).toArray(new String[0]);
 
-                    if (commandType.getNumberOfArguments() != arr.length - 1)
-                        throw new IllegalArgumentException("Argument list must be of size " + commandType.getNumberOfArguments());
-
-                    return new Command(commandType, List.of(arr).subList(1, arr.length));
+                    return CommandFactory.getCommand(type, args);
                 });
     }
 

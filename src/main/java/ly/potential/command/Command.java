@@ -1,21 +1,24 @@
 package ly.potential.command;
 
-import java.util.List;
+import ly.potential.canvas.drawing.Drawer;
 
-public class Command {
-    private final CommandType type;
-    private final List<String> arguments;
+import java.util.Arrays;
 
-    public Command(CommandType type, List<String> arguments){
-        this.type = type;
-        this.arguments = List.copyOf(arguments);
+public abstract class Command {
+    private final String[] arguments;
+
+    protected Command(String ...arguments){
+        if(arguments.length!= getNumberOfArguments())
+            throw new IllegalArgumentException("Argument list must be of size " + getNumberOfArguments());
+
+        this.arguments = Arrays.copyOf(arguments,arguments.length);
     }
 
-    public CommandType getType() {
-        return type;
-    }
-
-    public List<String> getArguments() {
+    public String[] getArguments() {
         return arguments;
     }
+
+    public abstract Drawer getDrawer();
+
+    public abstract int getNumberOfArguments();
 }
