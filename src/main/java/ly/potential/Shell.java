@@ -1,6 +1,7 @@
 package ly.potential;
 
 import ly.potential.canvas.Canvas;
+import ly.potential.command.Command;
 import ly.potential.command.execution.CommandExecutor;
 import ly.potential.command.parsing.CommandParser;
 
@@ -22,8 +23,8 @@ public class Shell {
             var userInput = console.readLine("enter command: ");
 
             try {
-                commandParser.parse(userInput)
-                        .flatMap(command -> commandExecutor.execute(currentCanvas, command))
+                Command command = commandParser.parse(userInput);
+                commandExecutor.execute(currentCanvas, command)
                         .ifPresentOrElse(canvas -> {
                             currentCanvas = canvas;
                             System.out.print(canvas);

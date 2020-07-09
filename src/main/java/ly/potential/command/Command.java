@@ -23,4 +23,17 @@ public abstract class Command {
     public abstract int getNumberOfArguments();
 
     public abstract String commandFormat();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Command command = (Command) o;
+        return Arrays.equals(arguments, command.arguments);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(arguments);
+    }
 }

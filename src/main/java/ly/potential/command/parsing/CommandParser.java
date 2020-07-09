@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-public class CommandParser implements Parser<Optional<Command>, String> {
+import static java.util.function.Predicate.not;
 
-    @Override
-    public Optional<Command> parse(String input) {
+public class CommandParser {
+    public Command parse(String input) {
         return Optional.ofNullable(input)
-                .filter(s -> !s.isBlank())
+                .filter(not(String::isBlank))
                 .map(String::strip)
                 .map(Pattern.compile(" ")::split)
                 .map(arr -> {
@@ -20,7 +20,8 @@ public class CommandParser implements Parser<Optional<Command>, String> {
                     String[] args = List.of(arr).subList(1, arr.length).toArray(new String[0]);
 
                     return CommandFactory.getCommand(type, args);
-                });
+                })
+                .orElseThrow(() -> new IllegalArgumentException("Command must not be empty"));
     }
 
 }

@@ -1,6 +1,7 @@
 package ly.potential.canvas;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Canvas {
     private final String[] currentState;
@@ -32,5 +33,22 @@ public class Canvas {
     @Override
     public String toString() {
         return String.join("\n", currentState) + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Canvas canvas = (Canvas) o;
+        return height == canvas.height &&
+                width == canvas.width &&
+                Arrays.equals(currentState, canvas.currentState);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(height, width);
+        result = 31 * result + Arrays.hashCode(currentState);
+        return result;
     }
 }
