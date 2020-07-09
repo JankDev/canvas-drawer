@@ -17,4 +17,9 @@ public class QuitCommand extends Command {
     public int getNumberOfArguments() {
         return 0;
     }
+
+    @Override
+    public String commandFormat() {
+        return "Q";
+    }
 }

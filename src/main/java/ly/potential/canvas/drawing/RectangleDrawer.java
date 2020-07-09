@@ -14,6 +14,10 @@ public class RectangleDrawer implements Drawer {
 
         Integer x1 = parsedArgs[0], y1 = parsedArgs[1];
         Integer x2 = parsedArgs[2], y2 = parsedArgs[3];
+        
+        if (!currentCanvas.isPointInside(x1, y1) || !currentCanvas.isPointInside(x2, y2))
+            throw new IllegalStateException("All points must be inside the canvas");
+
 
         for (int i = y1; i <= y2; i++) {
             var sb = new StringBuilder(newState[i]);

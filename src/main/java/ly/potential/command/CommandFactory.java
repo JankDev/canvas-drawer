@@ -10,7 +10,7 @@ public class CommandFactory {
             case "R" -> new RectangleCommand(args);
             case "B" -> new BucketFillCommand(args);
             case "Q" -> new QuitCommand(args);
-            default -> throw new IllegalStateException("Unexpected value: " + type);
+            default -> throw new IllegalStateException("No such command: " + type);
         };
     }
 }

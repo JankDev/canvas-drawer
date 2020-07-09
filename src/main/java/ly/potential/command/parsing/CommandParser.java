@@ -16,7 +16,7 @@ public class CommandParser implements Parser<Optional<Command>, String> {
                 .map(String::strip)
                 .map(Pattern.compile(" ")::split)
                 .map(arr -> {
-                    String type = arr[0];
+                    String type = arr[0].toUpperCase();
                     String[] args = List.of(arr).subList(1, arr.length).toArray(new String[0]);
 
                     return CommandFactory.getCommand(type, args);

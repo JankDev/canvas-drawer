@@ -19,4 +19,9 @@ public class BucketFillCommand extends Command {
     public int getNumberOfArguments() {
         return 3;
     }
+
+    @Override
+    public String commandFormat() {
+        return "B x(int) y(int) c(character)";
+    }
 }

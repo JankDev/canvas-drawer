@@ -18,4 +18,9 @@ public class LineCommand extends Command {
     public int getNumberOfArguments() {
         return 4;
     }
+
+    @Override
+    public String commandFormat() {
+        return "L x1(int) y1(int) x2(int) y2(int)";
+    }
 }

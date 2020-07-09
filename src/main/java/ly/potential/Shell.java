@@ -1,6 +1,7 @@
 package ly.potential;
 
-import ly.potential.command.executing.CommandExecutor;
+import ly.potential.canvas.Canvas;
+import ly.potential.command.execution.CommandExecutor;
 import ly.potential.command.parsing.CommandParser;
 
 import java.io.Console;
@@ -8,6 +9,8 @@ import java.io.Console;
 public class Shell {
     private final CommandParser commandParser;
     private final CommandExecutor commandExecutor;
+
+    private Canvas currentCanvas = null;
 
     public Shell() {
         this.commandParser = new CommandParser();
@@ -20,11 +23,14 @@ public class Shell {
 
             try {
                 commandParser.parse(userInput)
-                        .flatMap(commandExecutor::execute)
-                        .ifPresentOrElse(System.out::print, () -> {
+                        .flatMap(command -> commandExecutor.execute(currentCanvas, command))
+                        .ifPresentOrElse(canvas -> {
+                            currentCanvas = canvas;
+                            System.out.print(canvas);
+                        }, () -> {
                             System.exit(0); // safe to use as we don't have any resources to release
                         });
-            } catch (IllegalArgumentException exception) {
+            } catch (IllegalArgumentException | IllegalStateException exception) {
                 System.out.println(exception.getLocalizedMessage());
             }
         }

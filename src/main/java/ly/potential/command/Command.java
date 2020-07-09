@@ -21,4 +21,6 @@ public abstract class Command {
     public abstract Drawer getDrawer();
 
     public abstract int getNumberOfArguments();
+
+    public abstract String commandFormat();
 }

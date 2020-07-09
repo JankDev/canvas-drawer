@@ -13,6 +13,9 @@ public class BucketFillDrawer implements Drawer {
         int x = Integer.parseInt(args[0]), y = Integer.parseInt(args[1]);
         char color = args[2].charAt(0);
 
+        if (!currentCanvas.isPointInside(x, y))
+            throw new IllegalStateException("The point must be inside the canvas");
+
         var newState = currentCanvas.getCurrentState();
         newState = fillCanvas(newState, x, y, color);
 
@@ -20,11 +23,11 @@ public class BucketFillDrawer implements Drawer {
     }
 
     /**
-     * @param state
-     * @param x
-     * @param y
-     * @param color
-     * @return
+     * @param state The current state of the canvas
+     * @param x The x coordinate of the point around which the area should be filled
+     * @param y The y coordinate of the point around which the area should be filled
+     * @param color The "color" which will be used for filling the area
+     * @return the new state of the canvas with an area filled with the given color
      */
     public String[] fillCanvas(String[] state, int x, int y, char color) {
         final var coloredFields = List.of('X', '-', '|', color);

@@ -4,11 +4,11 @@ import ly.potential.canvas.Canvas;
 
 public class CanvasDrawer implements Drawer {
     @Override
-    public Canvas draw(Canvas currentCanvas, String... args) throws IllegalArgumentException{
+    public Canvas draw(Canvas currentCanvas, String... args){
         final int height = Integer.parseInt(args[1]) + 2;
         final int width = Integer.parseInt(args[0]) + 2;
 
-        var stringBuilder = new StringBuilder("");
+        var stringBuilder = new StringBuilder();
 
         for (int row = 0; row < height; row++) {
             if (row == 0 || row == height - 1) {

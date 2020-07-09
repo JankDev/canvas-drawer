@@ -8,11 +8,15 @@ public class LineDrawer implements Drawer {
     private static final String DRAWING_SIGN = "X";
 
     @Override
-    public Canvas draw(Canvas currentCanvas, String... args) throws IllegalArgumentException {
+    public Canvas draw(Canvas currentCanvas, String... args) {
         final var parsedArgs = Arrays.stream(args)
                 .map(Integer::parseInt)
                 .toArray(Integer[]::new);
         final int x1 = parsedArgs[0], y1 = parsedArgs[1], x2 = parsedArgs[2], y2 = parsedArgs[3];
+
+        if (!currentCanvas.isPointInside(x1, y1) || !currentCanvas.isPointInside(x2, y2))
+            throw new IllegalStateException("All points must be inside the canvas");
+
         final boolean isVertical = x2 - x1 == 0;
 
         final var newState = currentCanvas.getCurrentState();

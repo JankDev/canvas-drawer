@@ -18,4 +18,9 @@ public class CanvasCommand extends Command {
     public int getNumberOfArguments() {
         return 2;
     }
+
+    @Override
+    public String commandFormat() {
+        return "C w(int) h(int)";
+    }
 }

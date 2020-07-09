@@ -21,13 +21,12 @@ public class Canvas {
         return height;
     }
 
-
     public int getWidth() {
         return width;
     }
 
     public boolean isPointInside(int x, int y) {
-        return x > 0 && x < width && y > 0 && y < height;
+        return x >= 1 && x <= width - 2 && y >= 1 && y <= height - 2;
     }
 
     @Override
