@@ -26,7 +26,7 @@ public class Canvas {
     }
 
     public boolean isPointInside(int x, int y) {
-        return x >= 1 && x <= width - 2 && y >= 1 && y <= height - 2;
+        return x >= 1 && x <= width && y >= 1 && y <= height;
     }
 
     @Override

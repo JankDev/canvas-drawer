@@ -23,14 +23,16 @@ public class BucketFillDrawer implements Drawer {
     }
 
     /**
+     * This function recursively fills all nearby points with the given color
+     *
      * @param state The current state of the canvas
      * @param x The x coordinate of the point around which the area should be filled
      * @param y The y coordinate of the point around which the area should be filled
      * @param color The "color" which will be used for filling the area
      * @return the new state of the canvas with an area filled with the given color
      */
-    public String[] fillCanvas(String[] state, int x, int y, char color) {
-        final var coloredFields = List.of('X', '-', '|', color);
+    private String[] fillCanvas(String[] state, int x, int y, char color) {
+        final var coloredFields = List.of(LineDrawer.DRAWING_SIGN, CanvasDrawer.HORIZONTAL_BORDER, CanvasDrawer.VERTICAL_BORDER, color);
 
         if (!currentCanvas.isPointInside(x, y) || coloredFields.contains(state[y].charAt(x))) {
             return state;
